@@ -16,6 +16,16 @@ export default function TodoList() {
     console.log(todo, ...todos);
   };
 
+  const updateTodo = (todoId, newValue) => {
+    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+      return;
+    }
+
+    setTodos((prev) =>
+      prev.map((item) => (item.id === todoId ? newValue : item))
+    );
+  };
+
   const removeTodo = (id) => {
     const removeArr = [...todos].filter((todo) => todo.id !== id);
 
@@ -40,6 +50,7 @@ export default function TodoList() {
         todos={todos}
         completeTodos={completeTodo}
         removeTodo={removeTodo}
+        updateTodo={updateTodo}
       />
     </div>
   );
